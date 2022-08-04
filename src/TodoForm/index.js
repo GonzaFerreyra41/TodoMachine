@@ -6,7 +6,7 @@ function TodoForm() {
     // Creamos un estado para nuestro nuevo TODO
     const [newTodoValue, setNewTodoValue] = React.useState("");
      // Desestructuramos las funciones que necesitamos para añadir un TODO y cerrar nuestro modal
-    const {
+    const {  
         addTodo,
         setOpenModal,
     } = React.useContext(TodoContext)
