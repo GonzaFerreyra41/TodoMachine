@@ -1,13 +1,15 @@
 import React from "react";
-import {useLocalStorage} from "./useLocalStorage" 
+import { useLocalStorage } from "./useLocalStorage" 
 
 
 function useTodos() {
     const {
         item: todos,
         saveItem: saveTodos, 
+        sincronizeItem :sincronizeTodos,
         loading,
         error,
+        
       } = useLocalStorage("TODOS_V1",[]);
     const [searchValue, setSearchValue] = React.useState("")
       
@@ -58,7 +60,7 @@ function useTodos() {
         newTodos.splice(todoIndex, 1); 
         saveTodos(newTodos);
     }
- return{
+ return {
     loading,
     error,
     totalTodos,
@@ -71,6 +73,7 @@ function useTodos() {
     deleteTodo,
     openModal,
     setOpenModal,
+    sincronizeTodos,
  };
 }
   

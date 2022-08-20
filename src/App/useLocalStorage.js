@@ -3,10 +3,13 @@ import React from "react";
 function useLocalStorage (itemName, inicialValue){
     // Creamos el estado inicial para nuestros errores y carga
     const [error, setError] = React.useState(false)
-     //Estado de carga
+    //Estado de carga
     const[loading, setLoading] = React.useState(true)
-     // Guardamos nuestros TODOs del localStorage en nuestro estado
+    // Guardamos nuestros TODOs del localStorage en nuestro estado
     const [item, setItem] = React.useState(inicialValue);
+    //Estado de re carga del ChangeAlert
+    const [sincroniezItem, setSincroniezItem] = React.useState(true);
+
     
     React.useEffect(() => {
       setTimeout(() => {
@@ -27,12 +30,15 @@ function useLocalStorage (itemName, inicialValue){
   
         setItem(parsedItem);
         setLoading(false);
+        setSincroniezItem(true);
       } catch(error){
         setError(error)
       }
   
-      }, 4000);
-    });
+      }, 3000);
+    }, [sincroniezItem]
+     //este segundo argumento, que es un arrays vacio, de nustro useEffect nos indica que solo se va a renderizar al cargar por primera vez nuestra aplicacion.
+    );
     
    
     // Creamos la función en la que actualizaremos nuestro localStorage
@@ -48,12 +54,19 @@ function useLocalStorage (itemName, inicialValue){
         setError(error)
       }
      };
+
+    const sincronizeItem = () =>{
+      setLoading(true);
+      setSincroniezItem(false);
+
+    }
   
        return {
         item,
         saveItem,
         loading,
         error,
+        sincronizeItem,
        };
   }
 
