@@ -11,27 +11,34 @@ import { TodosError } from "../TodosError";
 import { TodosLoading } from "../TodosLoauding";
 import { CreateTodoButton } from "../CreateTodoButton"
 import { Modal } from "../Modal"
-import { ChangeAlertWithStorageListener } from "../ChangeAlert"
+import { ChangeAlert } from "../ChangeAlert"
 
 
 
 function App() {
   const {
-    error,
-    loading,
-    searchedTodos,
-    completeTodo,
-    deleteTodo,
-    openModal,
-    setOpenModal,
-    totalTodos, 
-    completedTodos,
-    searchValue,
-    setSearchValue, 
-    addTodo, 
-    sincronizeTodos,
+  state,
+  stateUpdaters,
   } = useTodos(); 
 
+  const {
+    loading,
+    error,
+    totalTodos,
+    completedTodos,
+    searchValue,
+    searchedTodos,
+    openModal,
+  }= state;
+
+  const {
+    setSearchValue,
+    completeTodo,
+    addTodo,
+    deleteTodo,
+    setOpenModal,
+    sincronizeTodos,
+  }= stateUpdaters;
   return (
     <React.Fragment>
       {/*Reactclone y ReactChildren, 
@@ -98,7 +105,7 @@ function App() {
         addTodo={addTodo}
         setOpenModal={setOpenModal}
         />
-      <ChangeAlertWithStorageListener 
+      <ChangeAlert 
       sincronize={sincronizeTodos}
       />
       
